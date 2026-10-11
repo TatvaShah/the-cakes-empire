@@ -9,7 +9,7 @@ GH="Authorization: Bearer $GITHUB_DEMO_REPOS_TOKEN"; VH="Authorization: Bearer $
 curl -s -X POST -H "$GH" https://api.github.com/user/repos -d "{\"name\":\"$S\",\"private\":false,\"description\":\"Demo website by ClaudAura\"}" | python3 -c "import json,sys;d=json.load(sys.stdin);print('repo:',d.get('html_url') or d.get('message'))"
 rm -rf node_modules .next
 [ -d .git ] || git init -q -b main
-git add -A && git -c user.name="ClaudAura" -c user.email="hello@claudaura.ca" commit -qm "Demo site for $S" || true
+git add -A && git -c user.name="TatvaShah" -c user.email="43009439+TatvaShah@users.noreply.github.com" commit -qm "Demo site for $S" || true
 git push -q "https://x-access-token:${GITHUB_DEMO_REPOS_TOKEN}@github.com/TatvaShah/$S.git" main 2>&1 | sed "s/${GITHUB_DEMO_REPOS_TOKEN}/***/g"
 curl -s -X POST -H "$VH" -H "Content-Type: application/json" "https://api.vercel.com/v10/projects?teamId=$T" -d "{\"name\":\"$S\",\"framework\":\"nextjs\",\"gitRepository\":{\"type\":\"github\",\"repo\":\"TatvaShah/$S\"}}" | python3 -c "import json,sys;d=json.load(sys.stdin);print('project:',d.get('name'),d.get('error'))"
 curl -s -X PATCH -H "$VH" -H "Content-Type: application/json" "https://api.vercel.com/v9/projects/$S?teamId=$T" -d '{"ssoProtection":null}' | python3 -c "import json,sys;d=json.load(sys.stdin);print('sso:',d.get('ssoProtection'),d.get('error'))"

@@ -8,6 +8,15 @@ import "./globals.css";
 const siteUrl = getSiteUrl();
 const theme = resolveTheme();
 
+const ogImage = {
+  url: "https://the-cakes-empire.vercel.app/og.jpg",
+  secureUrl: "https://the-cakes-empire.vercel.app/og.jpg",
+  type: "image/jpeg",
+  width: 1200,
+  height: 630,
+  alt: "The Cakes Empire",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: site.seo.title, template: `%s | ${site.name}` },
@@ -16,6 +25,7 @@ export const metadata: Metadata = {
   applicationName: site.name,
   alternates: { canonical: "/" },
   openGraph: {
+    images: [ogImage],
     type: "website",
     locale: "en_CA",
     url: siteUrl,
@@ -24,6 +34,7 @@ export const metadata: Metadata = {
     description: site.seo.description,
   },
   twitter: {
+    images: [{ url: ogImage.url, alt: ogImage.alt }],
     card: "summary_large_image",
     title: site.seo.title,
     description: site.seo.description,
